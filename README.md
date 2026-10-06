@@ -8,6 +8,20 @@ You lead the design; Claude gives feedback, explains concepts, asks follow-ups, 
 
 ## Install
 
+### Option 1: Plugin (recommended — auto-restores context)
+
+Add to your `opencode.jsonc`:
+
+```jsonc
+{
+  "plugins": ["./path/to/vibe-wise-opencode/plugin"]
+}
+```
+
+Or install globally in `~/.config/opencode/opencode.jsonc`.
+
+### Option 2: Skills only (manual context restore)
+
 Copy skills to your global OpenCode skills directory:
 
 ```bash
@@ -45,11 +59,23 @@ To reset learning for a project:
 | **Design** | Review the design. **Confirm and continue** records it; no code yet |
 | **Implementation** | Review code changes. **Implement this step** authorizes Claude to make them |
 
-## Differences from Claude Code version
+## Plugin vs Skills-only
 
-- No hooks (OpenCode doesn't support session hooks yet)
-- Manual context restore: run `@learn` at session start to reload state
-- State stored in `.vibe-wise/` in your project
+| Feature | Plugin | Skills-only |
+|---------|--------|-------------|
+| Auto-restore context on session start | ✅ | ❌ (run `@learn` manually) |
+| Learning workflow | ✅ | ✅ |
+| State persistence | ✅ | ✅ |
+| Works across projects | ✅ | ✅ |
+
+## State
+
+Learning notes live in `.vibe-wise/` in your project:
+- `profile.md` — learner preferences and understanding
+- `progress.md` — learning history and pending decisions
+- `project-map.md` — system architecture notes
+
+Add `.vibe-wise/` to `.gitignore` to keep notes out of version control.
 
 ## License
 
